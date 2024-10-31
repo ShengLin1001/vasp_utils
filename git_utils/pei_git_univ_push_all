@@ -1,5 +1,6 @@
 #!/bin/bash
 
+USER_ACCOUNT=${USER:-"unknown_user"}
 REPOS=(~/mysoft/pei/vasp_utils ~/mysoft/pei/mymetal)
 
 for REPO in "${REPOS[@]}"; do
@@ -10,7 +11,7 @@ for REPO in "${REPOS[@]}"; do
         # 检查是否有未提交的更改并提交
         if [[ -n $(git status --porcelain) ]]; then
             git add .
-            git commit -m "Update from zcm6"
+            git commit -m "Update from $USER_ACCOUNT."
         else
             echo "No changes to commit in $REPO."
         fi
@@ -24,5 +25,6 @@ for REPO in "${REPOS[@]}"; do
         echo "Repository $REPO does not exist."
     fi
     echo "done!"
+    printf '=%.0s' {1..14}; echo
 done
 
